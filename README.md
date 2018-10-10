@@ -27,9 +27,12 @@ More specifically, a capture template looks like the following:
 ```vim
 let g:capture_templates = {
   \ 'foo': " The name of the template
-  \ { 'file': '~/foo.md', " The filename or filename pattern to use. The pattern can use the following variables: %d - day, %y - year, %M - month, %h - hh hour, %m - mm minute, %s - ss second, %w - weekday name, %D - yyyymmdd date, %h - hostname, %u - user, %f - current filename
-  \   'pattern': '^# Test <c-r>=strftime("%c")<cr>', " The search pattern for a new entry. This can
-  be any valid vimscript search expression.
+  \ { 'file': '~/foo.md', " The filename or filename pattern to use. 
+  \                       " The pattern can use the following variables: %d - day, %y - year, %M - month,
+  \                       " %h - hh hour, %m - mm minute, %s - ss second, %w - weekday name,
+  \                       " %D - yyyymmdd date, %h - hostname, %u - user, %f - current filename
+  \   'pattern': '^# Test <c-r>=strftime("%c")<cr>', " The search pattern for a new entry. This can be any
+  \                                                  " valid vimscript search expression.
   \   'new_snip': '# Test `!v strftime("%c")`', " The UltiSnips snippet to insert for a new entry
   \   'extend_pattern': '.*$', " The search pattern to determine where to extend an existing entry
   \   'extend_snip': 'Have some more foo!' " The UltiSnips snippet to insert when extending an entry
