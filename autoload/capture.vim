@@ -10,6 +10,29 @@ function! s:CheckTemplate(template)
   return v:true
 endfunction
 
+function! s:SubstitutePathVars(file_path)
+  let day = strftime('%d')
+  let year = strftime('%Y')
+  let month = strftime('%m')
+  let hour = strftime('%H')
+  let minute = strftime('%M')
+  let second = strftime('%S')
+  let weekday = strftime('%A')
+  let full_date = year . month . day
+
+  let file_path = fnamemodify(a:file_path,
+        \ ':gs?%d?' . day . '?'
+        \ . ':gs?%y?' . year . '?'
+        \ . ':gs?%m?' . month . '?'
+        \ . ':gs?%h?' . hour . '?'
+        \ . ':gs?%M?' . minute . '?'
+        \ . ':gs?%S?' . second . '?'
+        \ . ':gs?%w?' . weekday . '?'
+        \ . ':gs?%D?' . full_date . '?')
+
+  return file_path
+endfunction
+
 function! capture#Capture(template_name)
   if !exists('g:capture_templates')
     call s:PrintErr('No templates defined!')
@@ -28,14 +51,12 @@ function! capture#Capture(template_name)
   endif
 
   " Edit the specified file at the requested point
-  " Evaluate the filename in case it's an expression
-  let target_file = expand(template.file)
+  " Expand variables in the template file path
+  let target_file = s:SubstitutePathVars(template.file)
   execute 'edit' target_file
-  let pattern = expand(template.pattern)
-  let target_line = search(pattern, 'nc')
+  let target_line = search(template.pattern, 'nc')
   if target_line ==? 0
     let insert_command = 'normal! G'
-    echom line('$')
     if line('$') > 1
       let insert_command = insert_command . 'o'
     else
@@ -47,8 +68,7 @@ function! capture#Capture(template_name)
   else
     call cursor(target_line, 0)
     if has_key(template, 'extend_pattern')
-      let extend_pattern = expand(template.extend_pattern)
-      let extend_line = search(extend_pattern, 'n')
+      let extend_line = search(template.extend_pattern, 'n')
       if extend_line ==? 0
         call s:PrintErr("Couldn't find the marker for entry end!")
         let extend_line = target_line
