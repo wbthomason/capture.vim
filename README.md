@@ -27,9 +27,7 @@ More specifically, a capture template looks like the following:
 ```vim
 let g:capture_templates = {
   \ 'foo': " The name of the template
-  \ { 'file': '~/foo.md', " The filename or filename pattern to use. The pattern can use the
-  following variables: %d - day, %y - year, %M - month, %h - hh hour, %m - mm minute, %s - ss
-  second, %w - weekday name, %D - yyyymmdd date, %h - hostname, %u - user, %f - current filename
+  \ { 'file': '~/foo.md', " The filename or filename pattern to use. The pattern can use the following variables: %d - day, %y - year, %M - month, %h - hh hour, %m - mm minute, %s - ss second, %w - weekday name, %D - yyyymmdd date, %h - hostname, %u - user, %f - current filename
   \   'pattern': '^# Test <c-r>=strftime("%c")<cr>', " The search pattern for a new entry. This can
   be any valid vimscript search expression.
   \   'new_snip': '# Test `!v strftime("%c")`', " The UltiSnips snippet to insert for a new entry
@@ -39,6 +37,10 @@ let g:capture_templates = {
 ```
 
 `capture.vim` defines a single command: `:Capture <template name>`. Map it, run it directly, etc.
+
+Note that while the allowable variables in the capture file path are somewhat restricted, I'm open
+to either adding more options or implementing a better method of permitting capture file path
+formats.
 
 # Rationale/Purpose
 
