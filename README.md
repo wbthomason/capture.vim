@@ -68,14 +68,12 @@ Here are some practical example templates that I use in my configuration:
 let g:capture_templates = {
       \ 'journal': {'file': '~/wiki/journal/journal.md',
       \             'pattern': '^# ',
-      \             'new_snip': '# `!v strftime("%A, %F")`^M^M## `!v strftime("%R")` -
-      ${1:title}^M^M${0:entry}',
+      \             'new_snip': '# `!v strftime("%A, %F")`^M^M## `!v strftime("%R")` - ${1:title}^M^M${0:entry}',
       \             'extend_pattern': '.\+$',
       \             'extend_snip': '^M## `!v strftime("%R")` - ${1:title}^M^M${0:entry}'},
       \ 'research': {'file': '~/wiki/research.md',
       \             'pattern': '^# ',
-      \             'new_snip': '# `!v strftime("%A, %F")`^M^M## `!v strftime("%R")` -
-      ${1:title}^M^M${0:entry}',
+      \             'new_snip': '# `!v strftime("%A, %F")`^M^M## `!v strftime("%R")` - ${1:title}^M^M${0:entry}',
       \             'extend_pattern': '.\+$',
       \             'extend_snip': '^M## `!v strftime("%R")` - ${1:title}^M^M${0:entry}'},
       \ 'advisor': {'file': '~/wiki/advisor_meetings.md',
