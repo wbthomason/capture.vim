@@ -81,3 +81,7 @@ let g:capture_templates = {
       \             'new_snip': '# `!v strftime("%A, %F")`^M^M${0:meeting_notes}'},
       \}
 ```
+
+Note that `^M` is actually a newline (produced by the sequence `<c-v><cr>`); a current weakness of
+using UltiSnips anonymous snippets is that they seem to not expand `\n` to a newline or treat
+newlines in multi-line strings as newlines.
