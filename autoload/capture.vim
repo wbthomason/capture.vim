@@ -74,7 +74,7 @@ function! capture#Capture(template_name)
   else
     call cursor(target_line, 0)
     if has_key(template, 'extend_pattern')
-      let extend_line = search(template.extend_pattern, 'n')
+      let extend_line = search(template.extend_pattern, 'nb')
       if extend_line ==? 0
         call s:PrintErr("Couldn't find the marker for entry end!")
         let extend_line = target_line
