@@ -64,4 +64,22 @@ here. I hope someone else finds the core capturing functionality useful!
 
 Here are some practical example templates that I use in my configuration:
 
-## TODO: Add examples
+```vim
+let g:capture_templates = {
+      \ 'journal': {'file': '~/wiki/journal/journal.md',
+      \             'pattern': '^# ',
+      \             'new_snip': '# `!v strftime("%A, %F")`^M^M## `!v strftime("%R")` -
+      ${1:title}^M^M${0:entry}',
+      \             'extend_pattern': '.\+$',
+      \             'extend_snip': '^M## `!v strftime("%R")` - ${1:title}^M^M${0:entry}'},
+      \ 'research': {'file': '~/wiki/research.md',
+      \             'pattern': '^# ',
+      \             'new_snip': '# `!v strftime("%A, %F")`^M^M## `!v strftime("%R")` -
+      ${1:title}^M^M${0:entry}',
+      \             'extend_pattern': '.\+$',
+      \             'extend_snip': '^M## `!v strftime("%R")` - ${1:title}^M^M${0:entry}'},
+      \ 'advisor': {'file': '~/wiki/advisor_meetings.md',
+      \             'pattern': '^# ',
+      \             'new_snip': '# `!v strftime("%A, %F")`^M^M${0:meeting_notes}'},
+      \}
+```
